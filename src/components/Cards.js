@@ -4,6 +4,8 @@ class Cards extends React.Component {
     constructor(props) {
         super(props);
 
+        this.Randomize = this.Randomize.bind(this);
+
         this.state = {
             count: 0,
             cards: [
@@ -20,6 +22,18 @@ class Cards extends React.Component {
         }
     }
 
+    Randomize = () => {
+        console.log(this.state.cards)
+        let testArr = this.state.cards;
+        let shuffled = testArr
+            .map(value => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value)
+        console.log(shuffled)
+        // this.setState({cards: shuffled});
+        // console.log(this.state.cards);
+    }
+
     render() {
         return (
             <div id="container">
@@ -30,6 +44,7 @@ class Cards extends React.Component {
                         )
                     })}
                 </div>
+                <button onClick={this.Randomize}>Randomize</button>
             </div>
         );
     }
@@ -52,6 +67,8 @@ function Image({imageURL}) {
 
 }
 
+
+
 let availablePositions = [];
 const getPosition = () => {
     while (true) {
@@ -65,5 +82,6 @@ const getPosition = () => {
         }
     }
 }
+
 
 export default Cards;
