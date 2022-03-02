@@ -1,86 +1,56 @@
-import React from "react";
+import React, {useState} from 'react';
+import CardItem from "./CardItem";
 
-class Cards extends React.Component {
-    constructor(props) {
-        super(props);
+const Cards = () => {
+    const [cards, setCards] = useState([
+        {id: 1, name: "C", imageURL: "someURL"},
+        {id: 2, name: "C++", imageURL: "someURL"},
+        {id: 3, name: "C#", imageURL: "someURL"},
+        {id: 4, name: "Python", imageURL: "someURL"},
+        {id: 5, name: "Java", imageURL: "https://banner2.cleanpng.com/20190623/uxe/kisspng-logo-java-development-kit-portable-network-graphic-5d0f25d6871765.6875406615612738145533.jpg"},
+        {id: 6, name: "JavaScript", imageURL: "someURL"},
+        {id: 7, name: "Swift", imageURL: "someURL"},
+        {id: 8, name: "PHP", imageURL: "someURL"},
+        {id: 9, name: "GoLang", imageURL: "someURL"},
+    ])
 
-        this.Randomize = this.Randomize.bind(this);
+    const [winCount, setWinCount] = useState(0);
+    const [selectedCards, setSelectedCard] = useState([]);
 
-        this.state = {
-            count: 0,
-            cards: [
-                {id: 1, name: "C", imageURL: "someURL"},
-                {id: 2, name: "C++", imageURL: "someURL"},
-                {id: 3, name: "C#", imageURL: "someURL"},
-                {id: 4, name: "Python", imageURL: "someURL"},
-                {id: 5, name: "Java", imageURL: "https://banner2.cleanpng.com/20190623/uxe/kisspng-logo-java-development-kit-portable-network-graphic-5d0f25d6871765.6875406615612738145533.jpg"},
-                {id: 6, name: "JavaScript", imageURL: "someURL"},
-                {id: 7, name: "Swift", imageURL: "someURL"},
-                {id: 8, name: "PHP", imageURL: "someURL"},
-                {id: 9, name: "GoLang", imageURL: "someURL"},
-            ]
-        }
-    }
-
-    Randomize = () => {
-        console.log(this.state.cards)
-        let testArr = this.state.cards;
-        let shuffled = testArr
-            .map(value => ({ value, sort: Math.random() }))
+    const shuffleArray = (array) => {
+        return array
+            .map(value => ({value, sort: Math.random()}))
             .sort((a, b) => a.sort - b.sort)
-            .map(({ value }) => value)
-        console.log(shuffled)
-        // this.setState({cards: shuffled});
-        // console.log(this.state.cards);
+            .map(({value}) => value);
     }
 
-    render() {
-        return (
-            <div id="container">
-                <div id="card-container">
-                    {this.state.cards.map((data) => {
-                        return (
-                            <CardItem key={data.id} id={getPosition()} url={data.imageURL}/>
-                        )
-                    })}
-                </div>
-                <button onClick={this.Randomize}>Randomize</button>
-            </div>
-        );
+    const randomize = () => {
+        setCards(shuffleArray(cards));
     }
-}
 
-function CardItem(props) {
+    const updateGameState = (e) => {
+        console.log(e.target)
+        setWinCount(winCount + 1);
+
+    }
+
+    const handleCardClick = (e) => {
+        randomize();
+        updateGameState(e);
+    }
+
     return (
-        <div className="card" id={`card-${props.id}`}>
-            <Image imageURL={props.url}/>
+        <div id="container">
+            <div id="card-container">
+                {cards.map((data) => {
+                    return (
+                        <CardItem handleClick={handleCardClick} key={data.id} id={data.id} url={data.imageURL}/>
+                    )
+                })}
+            </div>
+            <button onClick={handleCardClick}>Randomize</button>
         </div>
     );
-}
-
-
-
-function Image({imageURL}) {
-    return (
-        <img className="card-image" src={imageURL} alt="picture"/>
-    )
-
-}
-
-
-
-let availablePositions = [];
-const getPosition = () => {
-    while (true) {
-        let randX = Math.floor((Math.random()) * 9) + 1;
-        let checkPositions = availablePositions.some((item) => {
-            return item === randX;
-        })
-        if (!checkPositions && randX !== 0) {
-            availablePositions.push(randX);
-            return randX;
-        }
-    }
 }
 
 
