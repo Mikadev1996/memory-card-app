@@ -2,7 +2,7 @@ import React from "react";
 
 function CardItem(props) {
     return (
-        <div onClick={props.handleClick} className="card" id={`card-${props.id}`}>
+        <div data-name={props.name} onClick={props.handleClick} className="card" id={`card-${props.id}`}>
             <Image imageURL={props.url}/>
         </div>
     );

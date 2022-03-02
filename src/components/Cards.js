@@ -44,11 +44,10 @@ const Cards = () => {
             <div id="card-container">
                 {cards.map((data) => {
                     return (
-                        <CardItem handleClick={handleCardClick} key={data.id} id={data.id} url={data.imageURL}/>
+                        <CardItem handleClick={handleCardClick} name={data.name} key={data.id} id={data.id} url={data.imageURL}/>
                     )
                 })}
             </div>
-            <button onClick={handleCardClick}>Randomize</button>
         </div>
     );
 }

@@ -45,11 +45,11 @@ nav {
 }
 
 .card:hover {
-    border: 1px solid grey;
-    box-shadow: 0 0 11px rgba(33,33,33,.2);
+    box-shadow: 0 0 11px rgba(33,33,33,1);
 }
 
 .card-image {
+    border: 1px solid palevioletred;
     border-radius: 10px;
     width: 150px;
     height: 150px;
