@@ -2,15 +2,18 @@ import React from "react";
 
 function CardItem(props) {
     return (
-        <div onClick={props.handleClick} className="card" id={`card-${props.id}`}>
-            <Image imageURL={props.url}/>
+        <div data-name={props.name} onClick={props.handleClick} className="card" id={`card-${props.id}`}>
+            <Image name={props.name} imageURL={props.url}/>
         </div>
     );
 }
 
-function Image({imageURL}) {
+function Image(props) {
     return (
-        <img className="card-image" src={imageURL} alt=""/>
+        <div>
+            <img data-name={props.name} className="card-image" src={props.imageURL} alt=""/>
+            <p>{props.name}</p>
+        </div>
     )
 
 }
