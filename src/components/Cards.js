@@ -15,7 +15,7 @@ const Cards = () => {
     ])
 
     const [winCount, setWinCount] = useState(0);
-    const [selectedCards, setSelectedCard] = useState([]);
+    const [selectedCards, setSelectedCards] = useState([]);
 
     const shuffleArray = (array) => {
         return array
@@ -28,10 +28,16 @@ const Cards = () => {
         setCards(shuffleArray(cards));
     }
 
-    const updateGameState = (e) => {
-        console.log(e.target)
-        setWinCount(winCount + 1);
-
+    const updateGameState = (e) => {g
+        setSelectedCards(array => [...array, e.target.dataset.name]);
+        let repeated = selectedCards.some((item) => {
+            return item === e.target.dataset.name;
+        })
+        if (!repeated) {
+            setWinCount(winCount + 1);
+        } else {
+            setWinCount(0);
+        }
     }
 
     const handleCardClick = (e) => {
@@ -42,9 +48,10 @@ const Cards = () => {
     return (
         <div id="container">
             <div id="card-container">
+                <div id="score-container"><p>Score: {winCount}</p></div>
                 {cards.map((data) => {
                     return (
-                        <CardItem handleClick={handleCardClick} name={data.name} key={data.id} id={data.id} url={data.imageURL}/>
+                            <CardItem handleClick={handleCardClick} name={data.name} key={data.id} id={data.id} url={data.imageURL}/>
                     )
                 })}
             </div>
