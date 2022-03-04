@@ -16,6 +16,15 @@ nav {
     align-items: center;
 }
 
+#score-container {
+    height: 65px;
+    width: 100%;
+    background: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #container {
     margin-top: 65px;
     height: calc(100vh - 65px);
@@ -23,7 +32,7 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-content: flex-start;
 }
 
 #card-container {
@@ -38,7 +47,7 @@ nav {
     margin: 25px ;
     height: 20rem;
     width: 18rem;
-    background: palevioletred;
+    background: slategrey;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +58,7 @@ nav {
 }
 
 .card-image {
-    border: 1px solid palevioletred;
+    border: 1px solid slategrey;
     border-radius: 10px;
     width: 150px;
     height: 150px;
